@@ -1,0 +1,8 @@
+resources:
+- deployment.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: p-repo.780.ir/flask-webhook
+  newName: p-repo.780.ir/flask-webhook
+  newTag: 0.6.5

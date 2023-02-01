@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: flask-webhook
+  name: flask-webhook
+  namespace: monitoring
+spec:
+  ports:
+    - port: 5443
+      protocol: TCP
+      nodePort: 30544
+      targetPort: 5443
+  selector:
+    app: flask-webhook
+  type: NodePort

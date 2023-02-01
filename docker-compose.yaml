@@ -1,0 +1,9 @@
+version: "3.3"
+services:
+  webhook:
+    image: p-repo.780.ir/flask-webhook:0.5
+    restart: always
+    ports:
+      - 5443:5443
+    volumes:
+      - ./data:/python-flask

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-webhook
+  namespace: monitoring
+  labels:
+    app: flask-webhook
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flask-webhook
+  template:
+    metadata:
+      labels:
+        app: flask-webhook
+    spec:
+      containers:
+        - name: flask-webhook
+          image: p-repo.780.ir/flask-webhook:0.6.2
+          ports:
+            - containerPort: 5443
+          volumeMounts:
+            - mountPath: /python-flask/jsonLogs
+              name: event-logs
+              # resources:
+              #   limits:
+              #     memory: 512Mi
+              #     cpu: 1Ki
+              #   requests:
+              #     memory: 512Mi
+              #     cpu: 1Ki
+      volumes:
+        - name: event-logs
+          persistentVolumeClaim:
+            claimName: data-event-logs-flask-webhook
